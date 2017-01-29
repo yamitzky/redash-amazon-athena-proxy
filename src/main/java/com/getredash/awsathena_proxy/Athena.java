@@ -49,11 +49,10 @@ public class Athena {
         typesMap.put(Types.TIMESTAMP, "date");
     }
 
-    public Athena(String athenaUrl, String awsAccessKey, String awsSecretKey, String s3StagingDir) {
+    public Athena(String athenaUrl, String s3StagingDir) {
         this.athenaUrl = athenaUrl;
         this.info = new Properties();
-        this.info.put("user", awsAccessKey);
-        this.info.put("password", awsSecretKey);
+        this.info.put("aws_credentials_provider_class","com.amazonaws.auth.InstanceProfileCredentialsProvider");
         this.info.put("s3_staging_dir", s3StagingDir);
     }
 

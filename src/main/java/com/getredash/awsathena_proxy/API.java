@@ -8,8 +8,6 @@ import static spark.Spark.*;
 
 class QueryRequest {
     String athenaUrl;
-    String awsAccessKey;
-    String awsSecretKey;
     String s3StagingDir;
     String query;
 }
@@ -29,7 +27,7 @@ public class API {
     public static Object queryRequest(Request req, Response res) {
         Gson gson = new Gson();
         QueryRequest body = gson.fromJson(req.body(), QueryRequest.class);
-        Athena athena = new Athena(body.athenaUrl, body.awsAccessKey, body.awsSecretKey, body.s3StagingDir);
+        Athena athena = new Athena(body.athenaUrl, body.s3StagingDir);
 
         try {
             Results results = athena.runQuery(body.query);
